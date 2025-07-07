@@ -1,3 +1,4 @@
+import 'package:basic_app/category_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -22,7 +23,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      home: // Todo ...,
+      home: const CatergoryScreen(),
     );
   }
 }
