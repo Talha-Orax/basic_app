@@ -1,3 +1,5 @@
+import 'package:basic_app/data/dummy_data.dart';
+import 'package:basic_app/widgets/category_grid_items.dart';
 import 'package:flutter/material.dart';
 
 class CatergoryScreen extends StatelessWidget {
@@ -6,49 +8,35 @@ class CatergoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Category Screen',
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              )),
-          centerTitle: true,
-          backgroundColor: const Color.fromARGB(255, 241, 161, 100),
-        ),
-        body: GridView(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 209, 108, 30),
+        title: const Text('Category Screen',
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            )),
+      ),
+      body: GridView(
+        padding: const EdgeInsets.all(25),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 3 / 2,
-            crossAxisSpacing: 50,
-            mainAxisExtent: 50,
-          ),
-          children: [
-            Text(
-              "1",
-              style: TextStyle(fontSize: 20, color: Colors.white),
+            crossAxisSpacing: 20,
+            mainAxisExtent: 150,
+            mainAxisSpacing:
+                20), // Using SliverGridDelegateWithFixedCrossAxisCount to create a grid layout
+        children: [
+          // alternative to using a for loop
+          // ...availableCategories.map((category) => CategoryGridItems(category: category)).toList
+          // this will create a list of CategoryGridItems widgets from the availableCategories list and spread them into the children list of the GridView
+          for (final category in availableCategories)
+            CategoryGridItems(
+              category: category,
             ),
-            Text(
-              "2",
-              style: TextStyle(fontSize: 20, color: Colors.white),
-            ),
-            Text(
-              "3",
-              style: TextStyle(fontSize: 20, color: Colors.white),
-            ),
-            Text(
-              "4",
-              style: TextStyle(fontSize: 20, color: Colors.white),
-            ),
-            Text(
-              "5",
-              style: TextStyle(fontSize: 20, color: Colors.white),
-            ),
-            Text(
-              "6",
-              style: TextStyle(fontSize: 20, color: Colors.white),
-            ),
-          ],
-        ));
+        ],
+      ),
+    );
   }
 }

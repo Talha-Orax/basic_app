@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:basic_app/model/Category.dart';
+import 'package:basic_app/model/category.dart';
 
+/// A list of available categories with their respective IDs, titles, and colors.
 const availableCategories = [
   Category(
     id: 'c1',
