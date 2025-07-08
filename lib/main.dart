@@ -1,4 +1,5 @@
 import 'package:basic_app/screens/category_screen.dart';
+import 'package:basic_app/screens/tabs.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -24,7 +25,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme,
-      home: const CatergoryScreen(),
+      home: const TabScreen(),
     );
   }
 }

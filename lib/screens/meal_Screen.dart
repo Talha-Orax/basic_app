@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 
 /// A widget that displays a list of meals with a title in the app bar.
 class MealScreen extends StatelessWidget {
-  const MealScreen({super.key, required this.title, required this.meals});
+  const MealScreen({super.key, this.title, required this.meals});
 
-  final String title;
+  final String? title;
   final List<Meal> meals;
 
   void selectmeal(BuildContext context, Meal meal) {
@@ -50,11 +50,14 @@ class MealScreen extends StatelessWidget {
         ),
       );
     }
+    if (title == null) {
+      return content;
+    }
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            title,
+            title!,
             style: const TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
