@@ -1,4 +1,3 @@
-import "package:basic_app/main.dart";
 import "package:basic_app/model/category.dart";
 import "package:flutter/material.dart";
 
@@ -7,17 +6,18 @@ class CategoryGridItems extends StatelessWidget {
   /// It shows the category title with a gradient background based on the category's color.
   // // Requires a Category object to be passed in.
   /// /// The category parameter must not be null.
-  const CategoryGridItems({super.key, required this.category});
+  const CategoryGridItems(
+      {super.key, required this.category, required this.onSelectCategory});
+
   final Category category;
+  final void Function() onSelectCategory;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(16),
       splashColor: Theme.of(context).colorScheme.primary,
-      onTap: () {
-        // Handle tap event, e.g., navigate to a category detail screen
-      },
+      onTap: onSelectCategory,
       child: Container(
         // margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(16),
