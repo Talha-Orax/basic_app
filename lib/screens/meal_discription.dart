@@ -11,6 +11,21 @@ class MealDiscriptionScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(meal.title),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              // Add functionality to toggle favorite status
+              // For now, just show a snackbar
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('${meal.title} added to favorites!'),
+                  duration: const Duration(seconds: 1),
+                ),
+              );
+            },
+            icon: const Icon(Icons.favorite_border_rounded),
+          ),
+        ],
       ),
       body: ListView(
         children: [

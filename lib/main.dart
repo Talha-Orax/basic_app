@@ -1,4 +1,3 @@
-import 'package:basic_app/screens/category_screen.dart';
 import 'package:basic_app/screens/tabs.dart';
 import 'package:flutter/material.dart';
 
