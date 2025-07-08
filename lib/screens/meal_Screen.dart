@@ -1,4 +1,5 @@
 import 'package:basic_app/model/meal.dart';
+import 'package:basic_app/widgets/meal_item.dart';
 import 'package:flutter/material.dart';
 
 /// A widget that displays a list of meals with a title in the app bar.
@@ -12,7 +13,7 @@ class MealScreen extends StatelessWidget {
     /// the content is a custom ListView that displays the meals.its used in body of Scaffold.
     Widget content = ListView.builder(
         itemCount: meals.length,
-        itemBuilder: (context, index) => Text(meals[index].title));
+        itemBuilder: (context, index) => Mealitem(meal: meals[index]));
 
     if (meals.isEmpty) {
       ///if the meals list is empty, it displays a message indicating that no meals were found.
