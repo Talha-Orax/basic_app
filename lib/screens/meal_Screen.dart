@@ -1,4 +1,5 @@
 import 'package:basic_app/model/meal.dart';
+import 'package:basic_app/screens/meal_discription.dart';
 import 'package:basic_app/widgets/meal_item.dart';
 import 'package:flutter/material.dart';
 
@@ -8,12 +9,25 @@ class MealScreen extends StatelessWidget {
 
   final String title;
   final List<Meal> meals;
+
+  void selectmeal(BuildContext context, Meal meal) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MealDiscriptionScreen(meal: meal),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     /// the content is a custom ListView that displays the meals.its used in body of Scaffold.
     Widget content = ListView.builder(
         itemCount: meals.length,
-        itemBuilder: (context, index) => Mealitem(meal: meals[index]));
+        itemBuilder: (context, index) => Mealitem(
+              meal: meals[index],
+              onSelectMeal: (meal) => selectmeal(context, meal),
+            ));
 
     if (meals.isEmpty) {
       ///if the meals list is empty, it displays a message indicating that no meals were found.

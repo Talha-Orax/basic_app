@@ -4,15 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class Mealitem extends StatelessWidget {
-  const Mealitem({super.key, required this.meal});
+  const Mealitem({super.key, required this.meal, required this.onSelectMeal});
 
+  final void Function(Meal meal) onSelectMeal;
   final Meal meal;
   @override
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          onSelectMeal(meal);
+        },
         child: Stack(
           children: [
             FadeInImage(
