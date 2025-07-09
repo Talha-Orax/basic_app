@@ -2,9 +2,10 @@ import 'package:basic_app/model/meal.dart';
 import 'package:flutter/material.dart';
 
 class MealDiscriptionScreen extends StatelessWidget {
-  const MealDiscriptionScreen({super.key, required this.meal});
+  const MealDiscriptionScreen(
+      {super.key, required this.meal, required this.onToogleFavoriteMeal});
   final Meal meal;
-
+  final void Function(Meal meal) onToogleFavoriteMeal;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,16 +15,11 @@ class MealDiscriptionScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              // Add functionality to toggle favorite status
-              // For now, just show a snackbar
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('${meal.title} added to favorites!'),
-                  duration: const Duration(seconds: 1),
-                ),
-              );
+              onToogleFavoriteMeal(meal);
             },
-            icon: const Icon(Icons.favorite_border_rounded),
+            icon: const Icon(
+              Icons.favorite_border_rounded,
+            ),
           ),
         ],
       ),

@@ -5,17 +5,21 @@ import 'package:flutter/material.dart';
 
 /// A widget that displays a list of meals with a title in the app bar.
 class MealScreen extends StatelessWidget {
-  const MealScreen({super.key, this.title, required this.meals});
+  const MealScreen(
+      {super.key,
+      this.title,
+      required this.meals,
+      required this.ontoogleFavoriteMeal});
 
   final String? title;
   final List<Meal> meals;
-
+  final void Function(Meal meal) ontoogleFavoriteMeal;
   void selectmeal(BuildContext context, Meal meal) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => MealDiscriptionScreen(meal: meal),
-      ),
+          builder: (context) => MealDiscriptionScreen(
+              meal: meal, onToogleFavoriteMeal: ontoogleFavoriteMeal)),
     );
   }
 
