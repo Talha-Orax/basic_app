@@ -1,6 +1,7 @@
 import 'package:basic_app/model/meal.dart';
 import 'package:basic_app/screens/category_screen.dart';
 import 'package:basic_app/screens/meal_Screen.dart';
+import 'package:basic_app/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
 
 class TabScreen extends StatefulWidget {
@@ -46,27 +47,38 @@ class _TabScreenState extends State<TabScreen> {
     });
   }
 
+  void selectScreenByDrawer(String identifier) {
+    if (identifier == "Settings") {
+      //filter
+    } else {
+      Navigator.pop(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    Widget ActiveScreen =
+    Widget activeScreen =
         CatergoryScreen(ontoogleFavoriteMeal: ontoogleFavoriteMeal);
-    var ActivePageTitle = "Category Screen";
+    var activePageTitle = "Category Screen";
     if (selectedIndex == 1) {
-      ActiveScreen = MealScreen(
+      activeScreen = MealScreen(
           meals: favoriteMeals, ontoogleFavoriteMeal: ontoogleFavoriteMeal);
-      ActivePageTitle = "Your Favorites";
+      activePageTitle = "Your Favorites";
     }
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: const Color.fromARGB(255, 209, 108, 30),
-          title: Text(ActivePageTitle,
+          title: Text(activePageTitle,
               style: const TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               )),
         ),
-        body: ActiveScreen, //
+        drawer: MainDrawer(
+          onSelectScreen: selectScreenByDrawer,
+        ),
+        body: activeScreen, //
 
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: selectedIndex,
