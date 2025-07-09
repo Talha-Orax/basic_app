@@ -1,6 +1,7 @@
 import 'package:basic_app/model/meal.dart';
 import 'package:basic_app/screens/category_screen.dart';
-import 'package:basic_app/screens/meal_Screen.dart';
+import 'package:basic_app/screens/filter_screen.dart';
+import 'package:basic_app/screens/meal_screen.dart';
 import 'package:basic_app/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -48,10 +49,13 @@ class _TabScreenState extends State<TabScreen> {
   }
 
   void selectScreenByDrawer(String identifier) {
+    Navigator.pop(context); // Close the drawer
     if (identifier == "Settings") {
-      //filter
-    } else {
-      Navigator.pop(context);
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const Filters(),
+        ),
+      );
     }
   }
 
