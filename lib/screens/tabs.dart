@@ -5,6 +5,13 @@ import 'package:basic_app/screens/meal_screen.dart';
 import 'package:basic_app/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
 
+const kinitializedFilters = {
+  FilterEnum.glutenFree: false,
+  FilterEnum.lactoseFree: false,
+  FilterEnum.vegan: false,
+  FilterEnum.vegetarian: false,
+};
+
 class TabScreen extends StatefulWidget {
   const TabScreen({super.key});
 
@@ -13,6 +20,8 @@ class TabScreen extends StatefulWidget {
 }
 
 class _TabScreenState extends State<TabScreen> {
+  Map<FilterEnum, bool> _selectedFilters = kinitializedFilters;
+
   // List to store favorite meals
   final List<Meal> favoriteMeals = [];
 
@@ -48,14 +57,18 @@ class _TabScreenState extends State<TabScreen> {
     });
   }
 
-  void selectScreenByDrawer(String identifier) {
+  void selectScreenByDrawer(String identifier) async {
     Navigator.pop(context); // Close the drawer
     if (identifier == "Settings") {
-      Navigator.of(context).push(
+      /// Navigate to the filter screen and wait for the result the result will store in reults and we had further defined the push event to return the filter values
+      final results = await Navigator.of(context).push<Map<FilterEnum, bool>>(
         MaterialPageRoute(
           builder: (context) => const Filters(),
         ),
       );
+      setState(() {
+        _selectedFilters = results ?? kinitializedFilters;
+      });
     }
   }
 
