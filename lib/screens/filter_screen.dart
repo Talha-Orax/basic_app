@@ -10,8 +10,9 @@ enum FilterEnum {
 }
 
 class Filters extends StatefulWidget {
-  const Filters({super.key});
+  const Filters({super.key, required this.checkfilters});
 
+  final Map<FilterEnum, bool> checkfilters;
   @override
   State<Filters> createState() => _FiltersState();
 }
@@ -21,6 +22,15 @@ class _FiltersState extends State<Filters> {
   var _lactoseFree = false;
   var _vegan = false;
   var _vegetarian = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _glutenFree = widget.checkfilters[FilterEnum.glutenFree]!;
+    _lactoseFree = widget.checkfilters[FilterEnum.lactoseFree]!;
+    _vegan = widget.checkfilters[FilterEnum.vegan]!;
+    _vegetarian = widget.checkfilters[FilterEnum.vegetarian]!;
+  }
 
   @override
   Widget build(BuildContext context) {
