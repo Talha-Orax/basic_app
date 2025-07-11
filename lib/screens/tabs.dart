@@ -1,10 +1,11 @@
 import 'package:basic_app/data/dummy_data.dart';
-import 'package:basic_app/model/meal.dart';
 import 'package:basic_app/screens/category_screen.dart';
 import 'package:basic_app/screens/filter_screen.dart';
 import 'package:basic_app/screens/meal_screen.dart';
 import 'package:basic_app/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:basic_app/provider/favorite_provider.dart';
 
 /// Enum to define the filter options
 const kinitializedFilters = {
@@ -14,44 +15,16 @@ const kinitializedFilters = {
   FilterEnum.vegetarian: false,
 };
 
-class TabScreen extends StatefulWidget {
+class TabScreen extends ConsumerStatefulWidget {
   const TabScreen({super.key});
 
   @override
-  State<TabScreen> createState() => _TabScreenState();
+  ConsumerState<TabScreen> createState() => _TabScreenState();
 }
 
-class _TabScreenState extends State<TabScreen> {
-  // List to store favorite meals
-  final List<Meal> favoriteMeals = [];
-
+class _TabScreenState extends ConsumerState<TabScreen> {
   /// This is a map to store the selected filters with default values
   Map<FilterEnum, bool> _selectedFilters = kinitializedFilters;
-
-  ///this function will add and remove meals from the favoriteMeals list
-  ///if the meal already exists in the list, it will be removed, otherwise it will add
-  void ontoogleFavoriteMeal(Meal meal) {
-    final mealexists = favoriteMeals.contains(meal);
-    if (mealexists) {
-      setState(() {
-        favoriteMeals.remove(meal);
-      });
-      favoriteInfoUpdate("${meal.title} removed from favorites");
-    } else {
-      setState(() {
-        favoriteMeals.add(meal);
-        favoriteInfoUpdate("${meal.title} added to favorites");
-      });
-    }
-  }
-
-  void favoriteInfoUpdate(String message) {
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(message),
-      duration: const Duration(seconds: 1),
-    ));
-  }
 
   int selectedIndex = 0;
   void selectScreen(int index) {
@@ -93,13 +66,13 @@ class _TabScreenState extends State<TabScreen> {
       }
       return true;
     }).toList();
-    Widget activeScreen = CatergoryScreen(
-        ontoogleFavoriteMeal: ontoogleFavoriteMeal,
-        availableMeals: availableMeals);
+    Widget activeScreen = CatergoryScreen(availableMeals: availableMeals);
     var activePageTitle = "Category Screen";
     if (selectedIndex == 1) {
+      final _favoriteMeals = ref.watch(favoriteProvider);
       activeScreen = MealScreen(
-          meals: favoriteMeals, ontoogleFavoriteMeal: ontoogleFavoriteMeal);
+        meals: _favoriteMeals,
+      );
       activePageTitle = "Your Favorites";
     }
     return Scaffold(

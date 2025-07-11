@@ -56,7 +56,7 @@ class _FiltersState extends State<Filters> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (ctx) => TabScreen())); // Close the drawer
+                    builder: (ctx) => const TabScreen())); // Close the drawer
           }
         }),
 
