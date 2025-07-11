@@ -23,9 +23,13 @@ class MealDiscriptionScreen extends ConsumerWidget {
                   .onToogleFavoriteMeal(meal);
               ScaffoldMessenger.of(context).clearSnackBars();
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(wasadded
-                    ? " ${meal.title} removed as favorite"
-                    : "${meal.title} added as favorite"),
+                content: Text(
+                  wasadded
+                      ? " ${meal.title} removed as favorite"
+                      : "${meal.title} added as favorite",
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w700),
+                ),
                 duration: const Duration(seconds: 1),
               ));
             },
